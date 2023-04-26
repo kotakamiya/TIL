@@ -1,0 +1,48 @@
+# dfやファイルの中身をfor文を用いて出力した
+# 変数にindex名やcolumn名を代入するにはシーケンスにdata.columns.values, data.index.valuesとする必要がある
+# data.columns.values, data.index.valuesはそれぞれdata.columns, data.indexと省略が可能
+# np.random.randint(x, y)はx以上y未満のランダムな数字を等しい確率で出力をする関数であること
+# for文とif文を組み合わせる事によって評価の場合分けが容易になる
+
+(作ったモノ)
+↓ じゃんけんを3回繰り返すゲーム
+
+import numpy as np
+win = 0
+for step in np.arange(3):
+    print('step', 'step', 'street!')
+    my_hand = input('my_handの入力： グー, チョキ, パー：')
+    cpu_hand = input('cpu_handの入力:グー、チョキ、パー：')
+    print ('myhand', my_hand, 'cpuhand', cpu_hand)
+    if my_hand==cpu_hand:
+        print('グー、ちょき、パー')
+    elif my_hand=='グー' and cpu_hand=='チョキ':
+        print('あなたの勝ち')
+        win=win+1
+    elif my_hand == 'チョキ' and cpu_hand == 'パー':
+          print('あなたの勝ち')
+          win=win+1
+    elif my_hand == 'パー' and cpu_hand == 'グー':
+          print('あなたの勝ち')
+          win=win+1
+    else:
+        print('あなたの負け')
+
+print('終了。　あなたは', win, '回勝ちました')
+
+↓ データフレームの数学の点数をもとに成績を出す条件分岐
+
+import pandas as pd
+df = pd.read_csv(
+    'data//seiseki_bj_ren2.csv',
+    index_col = 'ID')
+
+for id in df.index:
+    if df.at[id, '数学'] >= 80:
+        df.at[id, '評価'] = 'A'
+    elif df.at[id, '数学'] >= 60:
+        df.at[id, '評価'] = 'B'
+    else:
+        df.at[id, '評価'] = '不合格'
+print (df)
+df.to_csv('data//for_kadai_results.csv')
