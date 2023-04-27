@@ -1,0 +1,73 @@
+## while文、２重for文について学びました
+
+# while文はfor文と違い、繰り返す回数が定かではない時に利用する変数である
+# try:文では、input（入力）の際に誤りがあった時にエラー文を出力する事ができる
+# while文では　whileの後に、処理を続ける条件を記述する
+#　　二重for文では、for文の中にfor文を記述する
+
+##コード
+#　正しい郵便番号を入力させ、それを抽出するコード
+import pandas as pd
+data = pd.read_csv('data//ken_data.csv',
+                  encoding = 'shift_jis', index_col = '郵便番号')　 #郵便番号のカラムを指定
+flag = True
+
+while flag:
+    number = input('7桁郵便番号の入力:')
+    try:
+        print ('あなた郵便番号は', int(number), 'です。')
+        flag = False
+    except ValueError:
+        print('文字ではなく、数字を入力してください。')
+        
+i = 0
+while data.index.values[i] != int(number): # すなわち入力した郵便番号と同じindex名になったら停止
+    print ('現在は', i, '番目の数字を検索してます。')
+    i += 1
+print ('あなたの郵便番号は', i, '番目にありました')
+print ('郵便番号', number, 'は', data.iloc[i, :], 'です。')
+
+#　３回勝つまでやめられないジャンケンゲームのコード
+
+import numpy as np
+win_count = 0
+
+while win_count <= 2: 
+    my_hand = input('my_handの入力')
+    cpu_select = np.random.randint(3)
+    if cpu_select == 0:
+        cpu_hand = 'グー'
+    elif cpu_select == 1:
+        cpu_hand = 'チョキ'
+    else:
+        cpu_hand = 'パー'
+    print ('my_hand', my_hand, ': cpu_hand', cpu_hand)
+    
+    if my_hand == 'グー' and cpu_hand == 'チョキ':
+        win_count += 1
+        print ('あなたの勝ち')
+    elif my_hand == 'チョキ' and cpu_hand == 'パー':
+        win_count += 1
+        print ('あなたの勝ち')
+    elif my_hand == 'パー' and cpu_hand == 'グー':
+        win_count += 1
+        print ('あなたの勝ち')
+    else:
+        print ('あなたの負け')
+
+print('終了')
+
+# 2重for文を使って、99を出力するコード
+
+import numpy as np
+
+kanzi_dan = np.array(['zero', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'])
+
+for dan in np.arange(1, 10):
+    print (kanzi_dan[dan], 'の段の計算開始')
+    for kazu in np.arange(1, 10):
+        print (kanzi_dan[dan], '×', kazu, '=', dan*kazu, 'です。')
+    print (kanzi_dan[dan], 'の計算終了')
+    
+print ('計算終了')
+        
