@@ -1,0 +1,53 @@
+## ２次元配列を出力する多重繰り返し文、Pythonを用いたデータ分析
+
+# シーケンスに二次元配列の変数.shape[0],[1]を指定する事によって行数と列数を変数に代入する事ができる
+# shape関数を書く事によって、行数や列数をいちいち記述する手間が省け、汎用性の高いプログラムとなる
+
+
+##　多重繰り返し文を使って二次元配列の要素を一つずう出力するプログラム
+
+import numpy as np
+d =np.array([[33, 44, 55, 66],
+              [88, 99, 100, 111]])
+
+for i in np.arange(2):
+    for j in np.arange(4):
+        print ('行は(i)=', i, '列(j)は=', j, 
+              'の要素は', d[i, j])
+        
+        
+import numpy as np
+for i in np.arange(d.shape[0]): #[0]は行数
+    for j in np.arange(d.shape[1]): #[1]は列数
+        print ('行=', i, '列=',  j, 'の要素数は', d[i, j], 'です。')
+
+d = np.ones((9, 9), dtype = 'int') #9行9列の２次元配列の作成
+for i in np.arange(d.shape[0]):
+    for j in np.arange(d.shape[1]):
+        d[i, j] = (i+1) * (j+1)
+
+print (d)
+
+## データから調査人数を求めたプログラム
+
+import numpy as np
+import pandas as pd
+
+data = pd.read_excel('data//demographic.xlsx',
+                    index_col = 'ID')
+display(data)
+display(data.columns) #カラム名を出力
+print (len(data)) #調査人数の出力
+print(data.shape) #行と列の出力
+
+## データから男女別の人数を求めたプログラム
+male = 0
+female = 0
+
+for i in data.index:　#indexの数だけ繰り返す
+    if data.at[i, '性別'] == 1:
+        male += 1
+    else:
+        female += 1
+print ('男性:', male, '人、女性:', female, '人です。')
+print ('合計は', male + female, '人です。')
