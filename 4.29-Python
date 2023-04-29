@@ -1,0 +1,79 @@
+## データを用いて、平均、分散、標準偏差、最大値、最小値を求めるプログラムを作成した
+
+# len(表の変数)で表の中にあるデータの数を見る事ができる
+# sqrt関数は標準偏差を求めるものである
+# data['カラム名'].quantile(0.5)によって、中央値を求める事ができる
+
+##　平均値と分散を求めるコード
+
+df = pd.DataFrame({'ren':np.arange(5, 8)})
+display(df)
+goukei = 0
+var = 0
+for k in df.index:
+    goukei = goukei + df.at[k, 'ren']
+ave = goukei / df.size
+for j in df.index:
+    var = var + (df.at[k, 'ren'] - ave)**2
+var = var/df.size
+print('平均値:', ave, '分散：', var)
+
+##中央値を求めるコード
+
+print('25%点は', data['年齢'].quantile(0.25)) #25%点の表示
+print('50%点は', data['年齢'].quantile(0.50)) #中央値の表示
+
+df_s = data.sort_values('年齢')#小さい順に並べる
+print ('min:', df_s.iloc[0, 0])
+print ('max:', df_s.iloc[len(data)-1, 0]) #lenによって調査数を求める
+
+##分散と標準偏差を求めるコード
+ave_male = male_age/male
+ave_female = female_age/female
+
+var_male = 0
+var_female = 0
+
+for i in data.index:
+    if data.at[i, '性別'] == 1:
+        var_male += (data.at[i, '年齢'] - ave_male)**2
+    else:
+         var_female += (data.at[i, '年齢'] - ave_female)**2　#**2 = 2乗
+var_male /= male
+var_female/=female
+
+print ('男性の分散:', var_male, '標準偏差', np.sqrt(var_male)) #np.sqrt(分散)で標準偏差を求める
+print ('女性の分散:', var_female, '標準偏差', np.sqrt(var_female))
+
+##平均年齢を求めるコード
+
+import numpy as np
+import pandas as pd
+
+data = pd.read_excel('data//demographic.xlsx',
+                    index_col = 'ID')
+display(data)
+display(data.columns) #カラム名を出力
+print (len(data)) #調査人数の出力
+print(data.shape) #行と列の出力
+
+male = 0
+female = 0
+for i in data.index:#indexの数だけ繰り返す
+    if data.at[i, '性別'] == 1:
+        male += 1
+    else:
+        female += 1
+print ('男性:', male, '人、女性:', female, '人です。')
+print ('合計は', male + female, '人です。')
+
+male_age = 0
+female_age = 0
+
+for i in data.index:
+    if data.at[i, '性別'] == 1:
+        male_age = male_age + data.at[i, '年齢']
+    else:
+        female_age = female_age + data.at[i, '年齢']
+
+print('男性の平均年齢は', male_age/male, 'です。', '女性の平均年齢は', female_age/female, 'です。')
