@@ -1,0 +1,37 @@
+## Pythonの機能を用いて度数、基本統計量、階層別の度数計測、データ算出の編集を行いました
+
+## 度数
+
+# data[].value_counts()と記述することで度数を算出できる
+
+
+import pandas as pd
+data = pd.read_excel('data//demographic.xlsx',
+                    index_col = 'ID')
+
+print (data)
+print (data['性別'].value_counts()) #性別ごとにカウントする関数
+print (data['年齢'].describe()) #年齢カラムの基本統計量を出力する関数
+
+##階層ごとの度数
+#pd.cut(data['年齢'], bins = [0, 10, 20, 30, 40, 50, 60, 70]) として階層分けができる
+
+import pandas as pd
+data = pd.read_excel('data//demographic.xlsx',
+                    index_col = 'ID')
+
+age = pd.cut(data['年齢'], bins = [0, 10, 
+                                20, 30, 40, 50, 60, 70]) #binsの数字を境界線として階層分けを行う
+
+p_data = age.value_counts()　#階層ごとの度数（人数）を出力
+print(p_data)
+
+
+##基本統計量
+#df.describeによって基本統計量を算出してくれる(めっちゃ便利！)
+
+pd.options.display.precision = 2 #小数点を2桁までにする
+pd.set_option('display.max_rows', 8) #行を8つ出力する
+display(df.describe())#基本統計量を出力
+
+
