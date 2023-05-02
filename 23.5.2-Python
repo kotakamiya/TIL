@@ -1,0 +1,35 @@
+## データを条件別で抽出する方法、Excelにいろいろな情報を書き込む方法、そして表の値をグラフに記述する方法を学んだ
+
+# query関数によって条件を設定できる
+
+print(df.query('国語 >= 76 and 数学 >= 59 and 英語 >= 70 and 理科 >= 59 and 社会 >= 75'))
+
+# いろいろな情報をexcelに記述する、そしてスプレッドシートに分ける
+
+import pandas as pd
+df = pd.read_csv('data//seiseki_8s.csv', index_col = 'ID')
+df.query('国語 >= 90 and 数学 <= 20')
+filepass = 'data//pandas_seiseki.xlsx' #記述するファイル名の指定
+dodf = df.sum(axis = 1).sort_values(ascending = False)#columns の合計を求めて、点数の高い順に並べる
+sumdf = df.sum(axis = 1).describe() #合計点の基本統計量を算出
+odf = df.query('国語 >= 76 and 数学 >= 59 and 英語 >= 70 and 理科 >= 59 and 社会 >= 75')
+with pd.ExcelWriter(filepass) as w:#excelに記述をする
+    df.to_excel(w, sheet_name = '試験結果') # to_excelでexcelに記述
+    dodf.to_excel(w, sheet_name = '降順済試験結果')
+    sumdf.to_excel(w, sheet_name = '合計の基本統計量')
+    odf.to_excel(w, sheet_name = '優秀な生徒')
+    
+
+#matplotlib ライブラリを使ってグラフを書いた
+
+%matplotlib inline
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.DataFrame({'xdf':np.arange(10, 15), 
+                  'ydf':np.arange(20, 25)},
+                 index = np.arange(1, 6))
+df.index.name = 'pair'
+display(df)
+plt.plot('xdf', 'ydf', data = df)#x軸にxdf、y軸にydfを指定する
+plt.show()
