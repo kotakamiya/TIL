@@ -1,0 +1,54 @@
+## グラフを描画作成、詳細設定、保存するためのコードを学んだ
+
+# グラフの詳細設定
+
+(1)
+plt.plot('xdf', 'ydf', data = df,
+        color = 'r', #赤色の線にする
+        marker = '.', #点線にする
+        linestyle = '--', 
+        label = 'default')
+plt.legend(loc = 'best')
+plt.show()
+
+(2)
+df = pd.DataFrame({'xdf' :np.arange(10), 'ydf' :np.arange(10)}) #x軸　y軸に１から１０の数字を追加
+plt.rcParams['font.size'] = 15#rcParamsは各セルの書式を設定する
+plt.rcParams['figure.figsize'] = [5, 5/2]#グラフサイズの設定
+plt.plot('xdf', 'ydf', color = 'r', marker = '.', linestyle = '--', data = df,
+        label = 'changed')
+plt.legend(loc = 'best')
+plt.xlim(-1, 11)
+plt.ylim(-1, 11)
+plt.xticks([0, 4, 8, 10], ['zero', 'four', 'eight', 'ten']) #x軸の目盛りを文字に置き換える
+plt.yticks([0, 4, 8, 10], ['A', 'B', 'C', 'D'], rotation = 90)
+plt.xlabel('x-axis') 
+plt.ylabel('y-axis')
+plt.title('Title')
+plt.show
+plt.savefig('first_fig.pdf', bbox_inches = 'tight')#グラフをpdf方式で保存する → https://gyazo.com/a98cbbb40865fcec226fdda6714814e4
+
+
+#日本語をグラフに記述するようにライブラリをインストールする
+
+import japanize_matplotlib
+df = pd.read_csv('data//seiseki_8s.csv', index_col = 'ID')
+
+#科目別に点の色を変え、２つのデータをグラフに重ねる
+
+plt.rcParams['lines.markersize'] = 8
+plt.plot('国語', '英語', color = 'g',
+        marker = '+', linestyle = '',
+        data = df, label = '国語-英語',
+        alpha = 0.3)
+plt.plot('数学', '理科', color = 'r',
+        marker = 'x', linestyle = '',
+        data = df, label = '数学-理科',
+        alpha = 0.3)
+plt.legend(loc = 'best')
+plt.show
+plt.savefig('second_fig.pdf', bbox_inches = 'tight')　→ https://gyazo.com/8a60a5bb75111aa26983750b2eb99ac5
+
+
+
+
