@@ -1,0 +1,65 @@
+## Pythonを使い、折れ線グラフ、棒グラフ、ヒストグラム、密度プロット、箱ヒゲ図を描くプログラムを組みました
+
+#折れ線グラフ
+
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv('data//UKgas.csv',
+                index_col = 'Year')
+df.plot(kind = 'line')#折れ線グラフを指定
+plt.ylabel('Quarterly UK gas')
+plt.savefig('data//fig5.pdf',
+           bbox_inches = 'tight')
+画像URL → https://gyazo.com/08afa47fb0931c651c4235e91508542b
+ 
+ 
+ #棒グラフ
+ 
+ plt.style.use('ggplot')
+plt.rcParams['figure.figsize'] = [5/2,5]#グラフの大きさ
+df.plot(kind = 'barh')#棒グラフ
+plt.xlabel('consumption')
+plt.savefig('data//barh.pdf',
+           bbox_inches = 'tight')
+           
+画像URL → https://gyazo.com/718432d9c261495fee868df6d655a4ac
+
+df.plot(kind = 'barh',
+       stacked = True,#棒グラフの積み上げ
+       cmap = 'Blues')#青色を指定
+plt.xlabel('consumption')
+plt.savefig('data//barh_stacked.pdf',
+            bbox_inches = 'tight')
+            
+画像URL → https://gyazo.com/e45335fdf460b6d42ab35e28331368d1         
+          
+#ヒストグラム
+
+plt.rcParams['figure.figsize'] = [2.5, 3]#グラフの大きさ
+df.plot(kind = 'hist',#ヒストグラム
+       alpha = 0.3,#棒の透明度
+       bins = 50)#棒の数を５０に制限
+plt.xlabel('consumption')
+plt.savefig('data//m_hist.pdf',
+           bbox_inches = 'tight')
+#x軸はガスの使用量、y軸はその値が計測される頻度を表す
+画像URL → https://gyazo.com/858c2f9af4ceb31d495be836ca938ab6
+
+#密度プロット
+
+df.plot(kind = 'density')#密度プロット
+
+plt.xlabel('consumption')
+plt.savefig('data//matplotlib_density.pdf',
+            bbox_inches = 'tight')
+画像URL → https://gyazo.com/16cf30ab977ecb9bad6725cefefa542c
+ 
+ #箱ヒゲ図
+ 
+plt.rcParams['figure.figsize'] = [4, 2]
+df.plot(kind = 'box')#箱ヒゲ図
+plt.savefig('data//box.pdf',
+            bbox_inches = 'tight')
+画像URL → https://gyazo.com/98c05dcc092fa4e68617df49ea7776e7           
+#箱ひげ図によって最大値、最小値、中央値、２５％点、75%点が一目でわかる様になる
+
