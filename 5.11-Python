@@ -1,0 +1,14 @@
+## ヒートマップによって相関係数を描く
+
+# ヒートマップの見方は対角線にある数を照らし合わせて考える
+
+import seaborn as sns 
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv('data//corr_8s.csv' ,index_col = 'ID')
+plt.rcParams['figure.figsize'] = [6, 4]
+sns.heatmap(df.corr(), annot = True, #各教科の相関係数を出力
+           vmin = -1.0, vmax = 1.0, #最小値、最大値を規定
+           cmap = 'coolwarm', #相関関係が高いと赤になり、低いと青になる
+           fmt = '1.2f')　#小数点第二位まで出力
+plt.savefig('data//heatmap.pdf', bbox_inches = 'tight')
