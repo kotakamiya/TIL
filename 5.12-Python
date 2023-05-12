@@ -1,0 +1,45 @@
+## Pythonの練習問題
+
+#配列の平均値の計算
+
+import numpy as np
+
+d = np.array([1, 2, 3])
+print(d)
+d_sum = d[0] + d[1] + d[2]
+print (d_sum)
+print (d_sum/3)
+
+import numpy as np
+d = np.array([1, 2, 3])
+print(d)
+print (np.sum(d))
+
+#配列番号の並び替え
+
+d = np.array([10, 11,12, 13, 14, ])
+print(d)
+d[0] = 12
+d[1] = 13
+d[2]   =11
+d[3]   =14
+d[4]   = 10
+print (d)
+
+# ライブラリの関数を使って、一通りの計算をした
+
+data = np.arange(1,7)
+print (data)
+data2 = data.reshape(2,3)
+print (data2)
+print(np.sum(data2))
+print(np.sum(data2, axis = 0))
+print(np.sum(data2, axis = 1))
+print(np.mean(data2))
+print(np.median(data2))
+print(np.std(data2))
+print(np.var(data2))
+print(np.max(data2))
+print(np.min(data2))
+print(np.argmax(data2))
+print(np.argmin(data2))
