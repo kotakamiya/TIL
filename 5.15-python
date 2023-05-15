@@ -1,0 +1,26 @@
+## データフレームに関する課題
+
+#データフレームの演算
+
+import pandas as pd 
+
+dffw = pd.read_excel('data//1st-week.xlsx',
+                  index_col = 'ID')
+dfsw = pd.read_excel('data//2st-week.xlsx',
+                  index_col = 'ID')
+dftw = pd.read_excel('data//3st-week.xlsx',
+                  index_col = 'ID')
+
+data_sum = dffw.add(dfsw, fill_value=0)
+data_sum = data_sum.add(dftw, fill_value = 0)
+display (data_sum)
+
+#データフレームの演算
+
+import pandas as pd 
+dfA = pd.read_csv('data//dataA.csv', index_col = 'ID')
+dfB = pd.read_csv('data//dataB.csv', index_col = 'ID')
+dfC = pd.read_csv('data//dataC.csv', index_col = 'ID')
+dfA = dfA.add(dfB, fill_value = 0) #fill_value = 0は記述されていない項目に０を代入する
+dfA = dfA.add(dfC, fill_value = 0)
+print (dfA)
