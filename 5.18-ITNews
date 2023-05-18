@@ -1,0 +1,51 @@
+## for文の問題を解いた
+
+# 間違えたこと
+・シーケンス変数の後ろの範囲を+1することを忘れてしまった　→　後ろの変数は＋１して書き込む
+・ループ変数に範囲と●段飛ばしで設定する方法を忘れていた　→ (最初, 最後, 何段とばすか)で覚えておく
+
+# 
+import numpy as np
+
+age = 5
+
+for i in np.arange(3):
+    print (age, 'さいから')
+    age = age + 1
+    print (age, 'さいになりました。')
+print ('現在は', age, 'さいです。')
+   
+#
+x = 0
+for i in np.arange(3):
+    x = x-1
+print (x)
+
+#
+x = 0
+for i in np.arange(5, 10):
+    x = x+i
+    print ('i= ', i, 'x=', x)
+print (x)
+
+#
+sum_data = 0
+for i in np.arange(1, 5001):
+    sum_data = sum_data+i
+print (sum_data)
+
+#
+import numpy as np 
+for kazu in np.arange(1, 10):
+    print ('三の段の三かける', kazu, '=', 3*kazu,　'です。')
+    
+#
+j = 0
+for k in np.arange(0, 10, 2):
+    print (j, '回目の繰り返しのループの中身は', k, 'です。')
+    j = j+1
+    
+#
+for k in np.arange(1, 4):
+    name = input('入力待機中：')
+    print (name,'さんは', k, '番目のお客さんです。')
