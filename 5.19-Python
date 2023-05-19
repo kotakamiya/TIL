@@ -1,0 +1,22 @@
+## データフレームの練習問題
+
+# 間違えたこと
+
+・dataframeで減算、乗算をする方法がわからなかった　→ subは減算、mulは乗算であることを覚えておく
+
+import pandas as pd
+dfA = pd.read_csv ('data//dataA.csv', index_col = 'ID')
+dfB = pd.read_csv ('data//dataB.csv', index_col = 'ID')
+dfC = pd.read_csv ('data//dataC.csv', index_col = 'ID')
+dfA = dfA.sub(dfB, fill_value = 0)
+dfA = dfA.sub(dfC, fill_value = 0) #add, sub, mul, div
+print (dfA)
+
+import pandas as pd
+dfA = pd.read_csv ('data//dataA.csv', index_col = 'ID')
+dfB = pd.read_csv ('data//dataB.csv', index_col = 'ID')
+dfC = pd.read_csv ('data//dataC.csv', index_col = 'ID')
+dfA = dfA.mul(dfB, fill_value = 0)
+dfA = dfA.mul(dfC, fill_value = 0) #add, sub, mul, div
+print (dfA)
+
