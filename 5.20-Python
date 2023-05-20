@@ -1,0 +1,49 @@
+## for文とif文の組み合わせ
+
+# 間違えたところ
+・if文の and を　＆＆と表記してしまった　→ Rubyと混同しないようにしっかりと復習をする
+
+#
+import pandas as pd 
+df = pd.read_csv('data//seiseki_bj_ren.csv', index_col = 'ID')
+
+for id in df.index.values:
+    if df.at[id, '国語'] >= 60:
+        df.at[id, '判定'] = 'A'
+    else:
+        df.at[id, '判定'] = '不合格'
+print ('判定終了')
+print(df)
+
+#
+import pandas as pd 
+df = pd.read_csv('data//seiseki_bj_ren2.csv', index_col = 'ID')
+
+for id in df.index.values:
+    if df.at[id, '数学'] >= 80:
+        df.at[id, '判定'] = 'A'
+    elif df.at[id, '数学'] >= 60:
+        df.at[id, '判定'] = 'B'
+    else:
+        df.at[id, '判定'] = '不合格'
+print ('判定終了')
+print(df)
+
+#
+import numpy as np
+for id in np.arange(4):
+    my_hand = input('ぐー、ちょき、ぱー')
+    cpu_hand = input('ぐー、ちょき、ぱー')
+    if my_hand == cpu_hand:
+        print ("あいこで")
+    elif my_hand == 'ぐー' and cpu_hand == 'ちょき':
+        print('君の勝ち')
+        id += 1
+    elif my_hand == 'ちょき' and cpu_hand == 'ぱー':
+         print('君の勝ち')
+         id+=1
+    elif my_hand == 'ぱー' and cpu_hand == 'ぐー':
+        print('君の勝ち')
+        id += 1
+    else:
+        print ('君の負け')
