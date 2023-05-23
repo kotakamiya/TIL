@@ -1,0 +1,47 @@
+## For文を使ったデータの加工
+
+# 間違えたこと
+・data = pd.read_csv('data//seiseki_5s_g.csv', index_col = 0)と定義したのにfor sid in df.ndex.values:としてしまったこと。
+→ 今度からは自分が定義したものを逐次確認するか、変数名を役割ごとに統一する
+
+# コード
+
+import pandas as pd 
+df = pd.read_csv('data//seiseki_bj_ren.csv', index_col = 'ID')
+for id in df.index.values:
+    if df.at[id, '国語'] >= 80:
+        df.at[id, '判定'] = 'A'
+    elif df.at[id, '国語'] >= 60:
+        df.at[id, '判定'] = 'B'
+    else:
+        df.at[id, '評価'] = '不合格'
+print (df)
+df.to_csv('data//for_kadai_results.csv')
+
+
+import pandas as pd 
+df = pd.read_csv('data//seiseki_bj_ren2.csv', index_col = 'ID')
+for id in df.index.values:
+    if df.at[id, '数学'] >= 80:
+        df.at[id, '判定'] = 'A'
+    elif df.at[id, '数学'] >= 60:
+        df.at[id, '判定'] = 'B'
+    else:
+        df.at[id, '評価'] = '不合格'
+print (df)
+df.to_csv('data//for_kadai_results.csv')
+
+
+import pandas as pd
+data = pd.read_csv('data//seiseki_5s_g.csv', index_col = 0)
+print (data)
+
+for sid in data.index.values:
+    data.loc[sid, '合計'] = data.loc[sid, '国語' : '社会'].sum()
+    if data.loc[sid, '合計'] >= 300:
+        data.loc[sid, '判定'] = 'A'
+    else:
+        data.loc[sid, '判定'] = '不合格'
+print ('成績評価後')
+print (data)
+data.to_csv('data//seiseki_5s_g_hantei.csv', index = True)
