@@ -1,0 +1,54 @@
+## for文とif文を使い、対話型のシステムとジャンケンゲームを作った
+
+# 対話型のシステムは業務を効率化する時にとても使えそうなので、今後の研究に活かしていきたいと思った
+
+from tkinter import Tk #TKによって画面にテキストボックスを出力できる
+import tkinter.simpledialog as sg, tkinter.messagebox as mx, numpy as np
+root = Tk()
+root.withdraw()
+name = sg.askstring('ELIZA:', 'あなたの名前を入力してください')
+mx.showinfo ('ELIZA:', (name, 'さん。　よろしくお願いします。'))
+for i in np.arange(3):
+    data = sg.askstring('ELIZA:', '何かお話ししましょう。')
+    selection = str(np.random.randint(0, 5))
+    if 'さようなら' == data:
+        break
+    elif '0' == selection:
+        mx.showinfo('ELIZA:', name+'さん。さすがですね')
+    elif '1' == selection:
+        mx.showinfo('ELIZA:', name+'さん。知らなかったです')
+    elif '2' == selection:
+        mx.showinfo('ELIZA:', name+'さん。すごいですね')
+    elif '3' == selection:
+        mx.showinfo('ELIZA:', name+'さん。センスいいですね')
+    elif '4' == selection:
+        mx.showinfo('ELIZA:', name+'さん。そうなんですか？')
+    else:
+        mx.showinfo('ELIZA:', name+'さん。何か言いました？')
+mx.showinfo('ELIZA:', name+'さん。さようなら')
+root.destroy()
+
+
+import numpy as np
+for step in np.arange(3):
+    print ('Step', step, 'start!')
+    my_hand = input('my_handの入力: rock, scissors, or paper : ')
+    cpu_select = np.random.randint(3)
+    if cpu_select == 0:
+        cpu_hand = 'paper'
+    elif cpu_select == 1:
+        cpu_hand = 'scissors'
+    else:
+        cpu_hand = 'rock'
+    print ('my_hand:', my_hand, 'cpu_hand', cpu_hand)
+    if my_hand == cpu_hand:
+        print ('rock, scissors, or paper :')
+    elif my_hand == 'rock' and cpu_hand == 'scissors':
+        print ('you win')
+    elif my_hand == 'scissors' and cpu_hand == 'paper':
+        print ('you win')
+    elif my_hand == 'paper' and cpu_hand == 'rock':
+        print ('you win')
+    else:
+        ('you lose')
+print ('game over')
