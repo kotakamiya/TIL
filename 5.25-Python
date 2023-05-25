@@ -1,0 +1,51 @@
+## while文の演習問題
+
+#
+import time, os, glob
+import pandas as pd
+sfs = os.listdir('data//rcard//') #一覧を取得
+print ('listdirの結果:', sfs)
+sfs = glob.glob('data//rcard//*.csv') #指定したファイルを取得
+print ('globの結果:', sfs)
+for sf in sfs:
+    print (sf, 'の読み込み準備', end = '・・・・')
+    data = pd.read_csv(sf, index_col = 0)
+    display(data)
+    print ('読み込み終了')
+
+# 
+i = 0
+while i < 1:
+    print ('loop')
+    i+=1
+    
+ 
+# 
+import numpy as np
+lose_count = 0
+
+while lose_count <= 4:
+    my_hand = input('my_handの入力: rock, scissors, or paper : ')
+    cpu_select = np.random.randint(3)
+    if cpu_select == 0:
+        cpu_hand = 'paper'
+    elif cpu_select == 1:
+        cpu_hand = 'scissors'
+    else:
+        cpu_hand = 'rock'
+    print ('my_hand:', my_hand, 'cpu_hand', cpu_hand)
+    if my_hand == cpu_hand:
+        print ('rock, scissors, or paper :')
+    elif my_hand == 'rock' and cpu_hand == 'scissors':
+        print ('you win')
+        lose_count += 1
+    elif my_hand == 'scissors' and cpu_hand == 'paper':
+        print ('you win')
+        lose_count += 1
+    elif my_hand == 'paper' and cpu_hand == 'rock':
+        print ('you win')
+        lose_count += 1
+    else:
+        ('you lose')
+   
+# 
