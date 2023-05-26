@@ -1,0 +1,20 @@
+## for文
+
+# 2限配列の各要素をfor文を使って出力する構文を学んだ
+
+
+
+import numpy as np
+
+d = np.array([[33, 44, 55, 66],
+             [199, 231, 333, 751]])
+
+for i in np.arange(2): 
+    for j in np.arange(4):
+        print ('行(i)=', i, '列(j)=', j,
+              'の要素は', d[i, j])　#配列の行と列を1つずつ取り出して、その値を出力する
+              
+              
+for i in np.arange(d.shape[0]):
+    for j in np.arange(d.shape[1]):
+        print ('行(i)=', i, '列(j)=', j, 'の要素は', d[i, j])　#配列の行と列を1つずつ取り出して、その値を出力する
