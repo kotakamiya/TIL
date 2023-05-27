@@ -1,0 +1,34 @@
+## ファイルからデータを出力する人
+
+# pd.set_optionによってデータの出力に制限をつけられる
+# df.describe()によって、基本統計量を出力できる
+# df.queryによって条件に当てはまる値だけを出力できる
+
+
+
+#
+import pandas as pd
+df = pd.read_csv('data//seiseki_8s.csv', index_col = 'ID')
+#
+pd.set_option ('display.max_columns', 9) #データの列数を９に制限
+pd.set_option('display.max_rows', 4)　# 行数を４に制限
+display(df)
+#
+pd.options.display.precision = 2　#　有効桁数を２桁にする
+pd.set_option('display.max_rows', 8)  #行数を８に制限する
+display(df.describe())　#基本統計量を算出する
+#
+df.query('国語 >= 90 and 数学 <= 20') #条件付きの出力
+#
+print (df.query('国語 >= 76 and 数学 >= 59 and 英語 >= 70 and 理科 >= 59 and 社会 >= 75'))
+
+#
+dodf = df.sum(axis = 1).sort_values(ascending = False)
+sumdf = df.sum(axis = 1).describe()
+odf = df.query ('国語　>= 76 and 数学 >= 59 and 英語 >= 70 and 理科 >= 59 and 社会 >= 75')
+
+with pd.ExcelWriter(filepass) as w:
+    df.to_excel(w, sheetname = '試験結果')
+    dodf.to_excel(w, sheetname = '降順済試験結果')
+    sumdf.to_excel(w, sheetname = '合計の基本統計量')
+    odf.to_excel(w, sheetname = '優秀な生徒')
